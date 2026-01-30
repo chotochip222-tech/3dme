@@ -1,85 +1,68 @@
-import { useEffect, useState } from 'react';
-import { ArrowDown } from 'lucide-react';
-
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  const words = ['Developer', 'Designer', 'Creator', 'Innovator'];
-  const [currentWord, setCurrentWord] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,99,71,0.1),transparent_50%)]"></div>
-        <div
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl"
-          style={{
-            transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        ></div>
-        <div
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-3xl"
-          style={{
-            transform: `translate(${-mousePosition.x}px, ${-mousePosition.y}px)`,
-            transition: 'transform 0.3s ease-out',
-          }}
-        ></div>
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+              <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+          <line x1="0" y1="30%" x2="30%" y2="0" stroke="rgba(255,99,71,0.3)" strokeWidth="1" />
+          <line x1="70%" y1="0" x2="100%" y2="30%" stroke="rgba(255,99,71,0.3)" strokeWidth="1" />
+          <line x1="0" y1="70%" x2="30%" y2="100%" stroke="rgba(255,99,71,0.3)" strokeWidth="1" />
+          <line x1="70%" y1="100%" x2="100%" y2="70%" stroke="rgba(255,99,71,0.3)" strokeWidth="1" />
+          <circle cx="15%" cy="20%" r="3" fill="rgba(255,99,71,0.4)" />
+          <circle cx="85%" cy="20%" r="3" fill="rgba(255,99,71,0.4)" />
+          <circle cx="15%" cy="80%" r="3" fill="rgba(255,99,71,0.4)" />
+          <circle cx="85%" cy="80%" r="3" fill="rgba(255,99,71,0.4)" />
+        </svg>
+
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center space-y-6">
-          <p className="text-orange-500 text-sm md:text-base font-medium tracking-widest uppercase animate-fade-in">
-            Welcome to my portfolio
+        <div className="text-center space-y-8 max-w-5xl mx-auto">
+          <p className="text-orange-500 text-sm font-normal tracking-[0.3em] uppercase">
+            LEARN. BUILD. GET PLACED.
           </p>
 
-          <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
-            <span className="block">Hi, I'm a</span>
-            <span className="block mt-2">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500 inline-block animate-gradient">
-                Creative {words[currentWord]}
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal text-white leading-tight">
+            <span className="block mb-2">Become The Software</span>
+            <span className="block">
+              Engineer That{' '}
+              <span className="inline-block relative">
+                <span className="relative z-10 px-4">Companies</span>
+                <span className="absolute inset-0 border-2 border-orange-500 rounded-sm"></span>
               </span>
             </span>
+            <span className="block mt-2">Want To Hire!</span>
           </h1>
 
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            I craft beautiful digital experiences that help businesses grow and succeed in the modern world.
+          <p className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-light">
+            Join a growing community of students preparing for real-world tech careers at Sheryians.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <button className="px-8 py-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50 font-medium">
-              View My Work
-            </button>
-            <button className="px-8 py-4 bg-transparent border-2 border-orange-500 text-orange-500 rounded-full hover:bg-orange-500 hover:text-white transition-all duration-300 font-medium">
-              Download CV
-            </button>
+          <div className="flex items-center justify-center space-x-3 pt-4">
+            <div className="flex -space-x-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-black"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-500 border-2 border-black"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-red-500 border-2 border-black"></div>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 border-2 border-black"></div>
+            </div>
+            <p className="text-gray-300 text-sm">
+              <span className="text-orange-500 font-semibold">1 Million+</span> Students learning in our mastery programs
+            </p>
           </div>
 
-          <div className="pt-16 animate-bounce">
-            <ArrowDown className="mx-auto text-orange-500" size={32} />
+          <div className="pt-8">
+            <button className="px-10 py-4 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 font-normal text-base">
+              Explore Programs
+            </button>
           </div>
         </div>
       </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent"></div>
     </section>
   );
 }
